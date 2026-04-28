@@ -1,0 +1,72 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: backend-fastapi-template
+  title: FastAPI Backend Golden Path
+  description: Create a standard Python FastAPI backend with Kubernetes deployment ready for Argo CD.
+spec:
+  owner: user:guest
+  type: service
+  parameters:
+    - title: Provide Information
+      required:
+        - component_id
+        - owner
+      properties:
+        component_id:
+          title: Name
+          type: string
+          description: Unique name of the component
+          ui:field: EntityNamePicker
+        owner:
+          title: Owner
+          type: string
+          description: Owner of the component
+          ui:field: OwnerPicker
+          ui:options:
+            allowedKinds:
+              - Group
+    - title: Repository Location
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+
+  steps:
+    - id: template
+      name: Fetch Skeleton + Template
+      action: fetch:template
+      input:
+        url: ./
+        values:
+          component_id: 
+          owner: 
+          repoUrl: 
+
+    - id: publish
+      name: Publish to GitHub
+      action: publish:github
+      input:
+        description: This is 
+        repoUrl: 
+
+    - id: register
+      name: Register in Catalog
+      action: catalog:register
+      input:
+        repoContentsUrl: 
+        catalogInfoPath: '/catalog-info.yaml'
+
+  output:
+    links:
+      - title: Repository
+        url: 
+      - title: Open in catalog
+        icon: catalog
+        entityRef: 

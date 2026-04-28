@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: demo-fastapi-service
+  description: demo-fastapi-service Python Backend
+  annotations:
+    github.com/project-slug: Geonobins/demo-fastapi-service
+    argocd/app-name: demo-fastapi-service
+spec:
+  type: service
+  lifecycle: experimental
+  owner: user:default/guest

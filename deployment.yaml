@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 
+  namespace: golden-path-apps
+  labels:
+    app: 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: 
+  template:
+    metadata:
+      labels:
+        app: 
+    spec:
+      containers:
+      - name: backend
+        # For PoC speed, using a pre-built public image to demonstrate Argo CD sync performance without waiting for CI build times.
+        image: hashicorp/http-echo:latest
+        imagePullPolicy: IfNotPresent
+        args:
+        - "-text={\"status\": \"Version 1.0 Live - Golden Path Backend: \"}"
+        - "-listen=:8000"
+        ports:
+        - containerPort: 8000
