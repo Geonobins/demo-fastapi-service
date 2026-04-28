@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: 
+  name: demo-fastapi-service
   namespace: golden-path-apps
   labels:
-    app: 
+    app: demo-fastapi-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: 
+      app: demo-fastapi-service
   template:
     metadata:
       labels:
-        app: 
+        app: demo-fastapi-service
     spec:
       containers:
       - name: backend
@@ -21,7 +21,7 @@ spec:
         image: hashicorp/http-echo:latest
         imagePullPolicy: IfNotPresent
         args:
-        - "-text={\"status\": \"Version 1.0 Live - Golden Path Backend: \"}"
+        - "-text={\"status\": \"Version 1.0 Live - Golden Path Backend: demo-fastapi-service\"}"
         - "-listen=:8000"
         ports:
         - containerPort: 8000
